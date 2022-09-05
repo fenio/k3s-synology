@@ -1,5 +1,7 @@
 # k3s (lightweight kubernetes) on Synology DS216+
 
+## "demo"
+
 ```
 root@backup:~# kubectl get pods -A
 NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
@@ -13,14 +15,17 @@ root@backup:~# uname -a
 Linux backup 3.10.108 #42218 SMP Tue Apr 26 04:09:35 CST 2022 x86_64 GNU/Linux synology_braswell_216+
 ```
 
-# notes about DSM version
-* 6.2.x - it would require rebuild of iptables to update it from 1.6.0 to something above 1.8.1
-* 7.1.x - might work at some point when Synology release kernel/toolchain/toolkit for this version
-* 7.0.x - WORKS and this tutorial is about how to make it
+## notes about DSM version
 
-# additional kernel modules for iptables
+* 6.2.x - it would require rebuild of iptables to update it from 1.6.0 to something above/equal 1.8.1
+* 7.1.x - might work at some point when Synology releases kernel/toolchain/toolkit for this version
+* 7.0.x - WORKS and this tutorial is all about it
+
+## additional kernel modules for iptables
 
 DSM 7.0.x comes with iptables 1.8.3 but not all kernel modules are available.
-We care mostly about ipt_REJECT and xt_comment. Without them k3s will fail.
+We care only about ipt_REJECT and xt_comment. Without them k3s fails.
+
+# Creating environment for building kernel modules
 
 
