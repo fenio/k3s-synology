@@ -1,4 +1,4 @@
-# k3s (lightweight kubernetes) on Synology DS216+ (DSM7).
+# k3s (lightweight kubernetes) on Synology DS216+
 
 ```
 root@backup:~# kubectl get pods -A
