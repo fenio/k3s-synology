@@ -58,5 +58,6 @@ tar Jxvf ../tarballs/ds.braswell-7.0.env.txz
 tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
 ```
 
+# kudos / thanks
 
 I would lie saying that I haven't used https://medium.com/@marco.mezzaro/k3s-on-synology-what-if-it-works-e980b4b09fcb / https://github.com/marcomezzaro/synok3s as a starting points for my own work but given how many modifications I had to make I'd rather say that Marco's work was just inspiration. But neverthless his work was very useful and kudos for him!
