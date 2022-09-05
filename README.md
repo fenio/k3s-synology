@@ -8,6 +8,7 @@ kube-system   local-path-provisioner-58fb86bdfd-qrb7n   1/1     Running   0     
 kube-system   coredns-5b66977746-d9k9c                  1/1     Running   0          10h
 kube-system   traefik-7b8b884c8-jppf4                   1/1     Running   0          10h
 kube-system   svclb-traefik-n84wx                       2/2     Running   0          10h
+
 root@backup:~# uname -a
 Linux backup 3.10.108 #42218 SMP Tue Apr 26 04:09:35 CST 2022 x86_64 GNU/Linux synology_braswell_216+
 ```
@@ -17,6 +18,9 @@ Linux backup 3.10.108 #42218 SMP Tue Apr 26 04:09:35 CST 2022 x86_64 GNU/Linux s
 * 7.1.x - might work at some point when Synology release kernel/toolchain/toolkit for this version
 * 7.0.x - WORKS and this tutorial is about how to make it
 
-Steps to create working k3s setup.
+# additional kernel modules for iptables
 
-Kernel.
+DSM 7.0.x comes with iptables 1.8.3 but not all kernel modules are available.
+We care mostly about ipt_REJECT and xt_comment. Without them k3s will fail.
+
+
