@@ -17,7 +17,7 @@ Linux backup 3.10.108 #42218 SMP Tue Apr 26 04:09:35 CST 2022 x86_64 GNU/Linux s
 
 ## notes about DSM version
 
-* 6.2.x - it would require rebuild of iptables to update it from 1.6.0 to something above/equal 1.8.1
+* 6.2.x - it would require rebuild of iptables to update it from 1.6.0 to something above/equal to 1.8.1
 * 7.1.x - might work at some point when Synology releases kernel/toolchain/toolkit for this version
 * 7.0.x - WORKS and this tutorial is all about it
 
@@ -49,3 +49,11 @@ wget https://global.download.synology.com/download/ToolChain/Synology%20NAS%20GP
 
 As you can see I'm using files for braswell arch (rather subarch) as this is what DS216+ is shipped with. If you have different model you have to use different files.
 
+```
+mkdir /synology/env
+cd /synology/env
+tar Jxvf ../tarballs/base_env-7.0.txz 
+tar Jxvf ../tarballs/ds.braswell-7.0.dev.txz
+tar Jxvf ../tarballs/ds.braswell-7.0.env.txz
+tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
+```
