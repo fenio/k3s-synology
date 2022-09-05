@@ -21,11 +21,18 @@ Linux backup 3.10.108 #42218 SMP Tue Apr 26 04:09:35 CST 2022 x86_64 GNU/Linux s
 * 7.1.x - might work at some point when Synology releases kernel/toolchain/toolkit for this version
 * 7.0.x - WORKS and this tutorial is all about it
 
+If you're already on DSM 7.1.x it's possible to do downgrade despite Synology saying it's not possible.
+Everything is possible... after all it's Linux :P
+Just google for it.
+
 ## additional kernel modules for iptables
 
 DSM 7.0.x comes with iptables 1.8.3 but not all kernel modules are available.
 We care only about ipt_REJECT and xt_comment. Without them k3s fails.
 
-# Creating environment for building kernel modules
+### Creating environment for building kernel modules
+
+In theory you could use https://github.com/SynologyOpenSource/pkgscripts-ng to create toolchain to compile kernel modules but despite having "ng" in its name it's rather old and unmaintained piece of software. Just forget about it. Well for 6.2.x is a good starting point but we're working on 7.0.x.
+
 
 
