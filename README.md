@@ -12,6 +12,11 @@ root@backup:~# uname -a
 Linux backup 3.10.108 #42218 SMP Tue Apr 26 04:09:35 CST 2022 x86_64 GNU/Linux synology_braswell_216+
 ```
 
+# notes about DSM version
+* 6.2.x - it would require rebuild of iptables to update it from 1.6.0 to something above 1.8.1
+* 7.1.x - might work at some point when Synology release kernel/toolchain/toolkit for this version
+* 7.0.x - WORKS and this tutorial is about how to make it
+
 Steps to create working k3s setup.
 
 Kernel.
