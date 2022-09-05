@@ -32,7 +32,20 @@ We care only about ipt_REJECT and xt_comment. Without them k3s fails.
 
 ### Creating environment for building kernel modules
 
-In theory you could use https://github.com/SynologyOpenSource/pkgscripts-ng to create toolchain to compile kernel modules but despite having "ng" in its name it's rather old and unmaintained piece of software. Just forget about it. Well for 6.2.x is a good starting point but we're working on 7.0.x.
+In theory you could use https://github.com/SynologyOpenSource/pkgscripts-ng to create toolchain to compile kernel modules but despite having "ng" in its name it's rather old and unmaintained piece of software. Just forget about it. Well for 6.2.x is a good starting point but we're working on 7.0.x and for anything newer than 6.2.x their scripts simply don't work.
+
+But happily these scripts don't do any magic. Based on what happens for 6.2.x I was able to prepare newer env myself with simple commands.
+We need some working Linux system. I personally use Debian but it shouldn't really matter. Use whatever you prefer. Just don't assume it's happening on NAS.
+
+It probably should be doable on non-root account but I didn't have time to play with it for too long so I'm assuming you're running it as root.
 
 
+```
+mkdir -p /synology/tarballs
+cd /synology/tarballs
+wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/base/base_env-7.0.txz
+wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.dev.txz
+wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.env.txz
+wget https://global.download.synology.com/download/ToolChain/Synology%20NAS%20GPL%20Source/7.0-41890/braswell/linux-3.10.x.txz
+```
 
