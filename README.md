@@ -87,7 +87,13 @@ Prompt: "comment" match support
           -> Core Netfilter Configuration
             -> Netfilter Xtables support (required for ip_tables) (NETFILTER_XTABLES [=m])
 ```
+Once you mark them as modules you can exit menuconfig and save changes.
 
+Then we can compile modules:
+
+```
+CHROOT@ds.braswell[/usr/local/linux-3.10.x]# make modules
+```
             
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 
