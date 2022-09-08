@@ -39,23 +39,26 @@ We need some working Linux system. I personally use Debian but it shouldn't real
 
 
 ```
-mkdir -p /synology/tarballs
-cd /synology/tarballs
-wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/base/base_env-7.0.txz
-wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.dev.txz
-wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.env.txz
-wget https://global.download.synology.com/download/ToolChain/Synology%20NAS%20GPL%20Source/7.0-41890/braswell/linux-3.10.x.txz
+root@debian:~# mkdir -p /synology/tarballs
+root@debian:~# cd /synology/tarballs
+root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/base/base_env-7.0.txz
+root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.dev.txz
+root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.env.txz
+root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/Synology%20NAS%20GPL%20Source/7.0-41890/braswell/linux-3.10.x.txz
 ```
 
 As you can see I'm using files for braswell arch (rather subarch) as this is what DS216+ is shipped with. If you have different model you have to use different files.
 
 ```
-mkdir /synology/env
-cd /synology/env
-tar Jxvf ../tarballs/base_env-7.0.txz 
-tar Jxvf ../tarballs/ds.braswell-7.0.dev.txz
-tar Jxvf ../tarballs/ds.braswell-7.0.env.txz
-tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
+root@debian:/synology/env# mkdir /synology/env
+root@debian:/synology/env# cd /synology/env
+root@debian:/synology/env# tar Jxvf ../tarballs/base_env-7.0.txz 
+root@debian:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.dev.txz
+root@debian:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.env.txz
+root@debian:/synology/env# tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
+root@debian:/synology/env# chroot 
+CHROOT@ds.braswell[/]# cd /usr/local/linux-3.10.x/
+CHROOT@ds.braswell[/usr/local/linux-3.10.x]# cp synoconfigs/braswell .config
 ```
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
