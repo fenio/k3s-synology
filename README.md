@@ -64,16 +64,16 @@ CHROOT@ds.braswell[/usr/local/linux-3.10.x]# make menuconfig
 We need these two options to be marked as module:
 
 ```
- Symbol: IP_NF_TARGET_REJECT [=n]
- Type  : tristate
- Prompt: REJECT target support
-   Location:
-     -> Networking support (NET [=y]) 
-       -> Networking options  
-         -> Network packet filtering framework (Netfilter) (NETFILTER [=y]) 
-           -> IP: Netfilter Configuration
-             -> IP tables support (required for filtering/masq/NAT) (IP_NF_IPTABLES [=m])
-               -> Packet filtering (IP_NF_FILTER [=m])
+Symbol: IP_NF_TARGET_REJECT [=n]
+Type  : tristate
+Prompt: REJECT target support
+  Location:
+    -> Networking support (NET [=y]) 
+      -> Networking options  
+        -> Network packet filtering framework (Netfilter) (NETFILTER [=y]) 
+          -> IP: Netfilter Configuration
+            -> IP tables support (required for filtering/masq/NAT) (IP_NF_IPTABLES [=m])
+              -> Packet filtering (IP_NF_FILTER [=m])
 ```
 
 ```
