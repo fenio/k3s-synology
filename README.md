@@ -94,6 +94,15 @@ Then we can compile modules:
 ```
 CHROOT@ds.braswell[/usr/local/linux-3.10.x]# make modules
 ```
+
+Once it's done this command should have same output:
+
+```
+CHROOT@ds.braswell[/usr/local/linux-3.10.x]# find | grep -E '(REJECT|comment).ko$'
+./net/ipv4/netfilter/ipt_REJECT.ko
+./net/netfilter/xt_comment.ko
+```
+
             
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 
