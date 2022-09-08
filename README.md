@@ -64,19 +64,31 @@ CHROOT@ds.braswell[/usr/local/linux-3.10.x]# make menuconfig
 We need these two options to be marked as module:
 
 ```
- Symbol: IP_NF_TARGET_REJECT [=n]                                                    │  
-  │ Type  : tristate                                                                             │  
-  │ Prompt: REJECT target support                                                                                                                                                                                                       │  
-  │   Location:                                                                                                                                                                                                                         │  
-  │     -> Networking support (NET [=y])                                                                                                                                                                                                │  
-  │       -> Networking options                                                                                                                                                                                                         │  
-  │         -> Network packet filtering framework (Netfilter) (NETFILTER [=y])                                                                                                                                                          │  
-  │           -> IP: Netfilter Configuration                                                                                                                                                                                            │  
-  │             -> IP tables support (required for filtering/masq/NAT) (IP_NF_IPTABLES [=m])                                                                                                                                            │  
-  │ (2)           -> Packet filtering (IP_NF_FILTER [=m])
+ Symbol: IP_NF_TARGET_REJECT [=n]
+ Type  : tristate
+ Prompt: REJECT target support                                                                                                        
+   Location:
+     -> Networking support (NET [=y]) 
+       -> Networking options  
+         -> Network packet filtering framework (Netfilter) (NETFILTER [=y]) 
+           -> IP: Netfilter Configuration
+             -> IP tables support (required for filtering/masq/NAT) (IP_NF_IPTABLES [=m])
+               -> Packet filtering (IP_NF_FILTER [=m])
 ```
 
+```
+Symbol: NETFILTER_XT_MATCH_COMMENT [=n] 
+Type  : tristate
+Prompt: "comment" match support
+  Location:
+    -> Networking support (NET [=y])
+      -> Networking options
+        -> Network packet filtering framework (Netfilter) (NETFILTER [=y])
+          -> Core Netfilter Configuration
+            -> Netfilter Xtables support (required for ip_tables) (NETFILTER_XTABLES [=m])
+```
 
+            
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 
 # kudos / thanks
