@@ -59,7 +59,23 @@ root@debian:/synology/env# tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
 root@debian:/synology/env# chroot 
 CHROOT@ds.braswell[/]# cd /usr/local/linux-3.10.x/
 CHROOT@ds.braswell[/usr/local/linux-3.10.x]# cp synoconfigs/braswell .config
+CHROOT@ds.braswell[/usr/local/linux-3.10.x]# make menuconfig
 ```
+We need these two options to be marked as module:
+
+```
+ Symbol: IP_NF_TARGET_REJECT [=n]                                                    │  
+  │ Type  : tristate                                                                             │  
+  │ Prompt: REJECT target support                                                                                                                                                                                                       │  
+  │   Location:                                                                                                                                                                                                                         │  
+  │     -> Networking support (NET [=y])                                                                                                                                                                                                │  
+  │       -> Networking options                                                                                                                                                                                                         │  
+  │         -> Network packet filtering framework (Netfilter) (NETFILTER [=y])                                                                                                                                                          │  
+  │           -> IP: Netfilter Configuration                                                                                                                                                                                            │  
+  │             -> IP tables support (required for filtering/masq/NAT) (IP_NF_IPTABLES [=m])                                                                                                                                            │  
+  │ (2)           -> Packet filtering (IP_NF_FILTER [=m])
+```
+
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 
