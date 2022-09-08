@@ -3,7 +3,7 @@
 ## "demo"
 
 ```
-root@backup:~# kubectl get pods -A
+root@synology:~# kubectl get pods -A
 NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
 kube-system   metrics-server-6d684c7b5-hnskg            1/1     Running   0          10h
 kube-system   local-path-provisioner-58fb86bdfd-qrb7n   1/1     Running   0          10h
@@ -11,7 +11,7 @@ kube-system   coredns-5b66977746-d9k9c                  1/1     Running   0     
 kube-system   traefik-7b8b884c8-jppf4                   1/1     Running   0          10h
 kube-system   svclb-traefik-n84wx                       2/2     Running   0          10h
 
-root@backup:~# uname -a
+root@synology:~# uname -a
 Linux backup 3.10.108 #42218 SMP Tue Apr 26 04:09:35 CST 2022 x86_64 GNU/Linux synology_braswell_216+
 ```
 
@@ -39,24 +39,24 @@ We need some working Linux system. I personally use Debian but it shouldn't real
 
 
 ```
-root@debian:~# mkdir -p /synology/tarballs
-root@debian:~# cd /synology/tarballs
-root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/base/base_env-7.0.txz
-root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.dev.txz
-root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.env.txz
-root@debian:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/Synology%20NAS%20GPL%20Source/7.0-41890/braswell/linux-3.10.x.txz
+root@laptop:~# mkdir -p /synology/tarballs
+root@laptop:~# cd /synology/tarballs
+root@laptop:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/base/base_env-7.0.txz
+root@laptop:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.dev.txz
+root@laptop:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/toolkit/7.0/braswell/ds.braswell-7.0.env.txz
+root@laptop:/synology/tarballs# wget https://global.download.synology.com/download/ToolChain/Synology%20NAS%20GPL%20Source/7.0-41890/braswell/linux-3.10.x.txz
 ```
 
 As you can see I'm using files for braswell arch (rather subarch) as this is what DS216+ is shipped with. If you have different model you have to use different files.
 
 ```
-root@debian:/synology/env# mkdir /synology/env
-root@debian:/synology/env# cd /synology/env
-root@debian:/synology/env# tar Jxvf ../tarballs/base_env-7.0.txz 
-root@debian:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.dev.txz
-root@debian:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.env.txz
-root@debian:/synology/env# tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
-root@debian:/synology/env# chroot 
+root@laptop:/synology/env# mkdir /synology/env
+root@laptop:/synology/env# cd /synology/env
+root@laptop:/synology/env# tar Jxvf ../tarballs/base_env-7.0.txz 
+root@laptop:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.dev.txz
+root@laptop:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.env.txz
+root@laptop:/synology/env# tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
+root@laptop:/synology/env# chroot 
 CHROOT@ds.braswell[/]# cd /usr/local/linux-3.10.x/
 CHROOT@ds.braswell[/usr/local/linux-3.10.x]# cp synoconfigs/braswell .config
 CHROOT@ds.braswell[/usr/local/linux-3.10.x]# make menuconfig
@@ -103,6 +103,13 @@ CHROOT@ds.braswell[/usr/local/linux-3.10.x]# find | grep -E '(REJECT|comment).ko
 ./net/netfilter/xt_comment.ko
 ```
 
+Now you have to copy these two files to /lib/modules on your Synology.
+Once that's done these two commands shouldn't return any errors:
+
+```
+root@synology:~# insmod /lib/modules/ipt_REJECT.ko 
+root@synology:~# insmod /lib/modules/xt_comment.ko 
+```
             
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 
