@@ -56,6 +56,10 @@ root@laptop:/synology/env# tar Jxvf ../tarballs/base_env-7.0.txz
 root@laptop:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.dev.txz
 root@laptop:/synology/env# tar Jxvf ../tarballs/ds.braswell-7.0.env.txz
 root@laptop:/synology/env# tar Jxvf ../tarballs/linux-3.10.x.txz -C usr/local
+```
+### modules compilation
+
+```
 root@laptop:/synology/env# chroot 
 CHROOT@ds.braswell[/]# cd /usr/local/linux-3.10.x/
 CHROOT@ds.braswell[/usr/local/linux-3.10.x]# cp synoconfigs/braswell .config
@@ -110,6 +114,8 @@ Once that's done these two commands shouldn't return any errors:
 root@synology:~# insmod /lib/modules/ipt_REJECT.ko 
 root@synology:~# insmod /lib/modules/xt_comment.ko 
 ```
+
+## k3s instalation
             
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 
