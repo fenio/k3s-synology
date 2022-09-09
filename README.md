@@ -141,16 +141,17 @@ root@synology:~# ln -s /volume1/rancher /var/lib/rancher
 root@synology:~# curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 ```
 
-At this point k3s should be running but it will stuck trying to create containers/pods. We have to fix one more thing so let's stop k3s for now.
-
-```
-root@synology:~# systemctl stop k3s
-```
-
+At this point k3s should be running but it will stuck trying to create containers/pods. We have to fix one more thing.
 During startup k3s should create containerd configuration file and we have to make copy of it and modify it.
 
 ```
 root@synology:~# cp /volume1/rancher/k3s/agent/etc/containerd/config.toml /volume1/rancher/k3s/agent/etc/containerd/config.toml.tmpl 
+```
+
+And now you can stop k3s.
+
+```
+root@synology:~# systemctl stop k3s
 ```
 
 Now edit config.toml.tmpl and add the following section to it:
