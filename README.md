@@ -116,8 +116,19 @@ root@synology:~# insmod /lib/modules/xt_comment.ko
 ```
 
 ## k3s instalation
+
+### notes on k3s / kubernetes versions
+
+This tutorial is about installing version v1.17.17+k3s1.
+
+And here goes explanation why.
+
+Starting from 1.20.x k3s/kubernetes requires CGROUP PIDS 
+Starting from 1.18.x k3s/kubernetes needs SECCOMP which in theory can be compiled in even on 3.10.x kernel but I didn't have time to work on that yet.
+
+### actual installation
             
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
+root@synology:~# curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
 
 # kudos / thanks
 
