@@ -166,7 +166,7 @@ root@synology:~# systemctl start k3s
 ```
 And you're done!
 
-### systemctl changes
+### systemd changes
 To load modules on start/reboot you have to modify /etc/systemd/system/k3s.service and add the following two lines before ExecStart command:
 
 ```
