@@ -128,8 +128,43 @@ Starting from 1.20.x k3s/kubernetes requires CGROUP PIDS which doesn't exist on 
 Starting from 1.18.x k3s/kubernetes needs SECCOMP which in theory can be compiled in even on 3.10.x kernel but I didn't have time to work on that yet.
 
 ### actual installation
-            
+
+k3s has below option but in version 17.x it's pretty broken so we're gonna cheat it to install in /volume1 by creating symlink.
+
+```
+   --data-dir value, -d value                 (data) Folder to hold state default /var/lib/rancher/k3s or ${HOME}/.rancher/k3s if not root
+```
+
+```
+root@synology:~# mkdir /volume1/rancher
+root@synology:~# ln -s /volume1/rancher /var/lib/rancher
 root@synology:~# curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.17.17+k3s1  sh -
+```
+
+At this point k3s should be running but it will stuck trying to create containers/pods. We have to fix one more thing so let's stop k3s for now.
+
+```
+root@synology:~# systemctl stop k3s
+```
+
+During startup k3s should create containerd configuration file and we have to make copy of it and modify it.
+
+```
+root@synology:~# cp /volume1/rancher/k3s/agent/etc/containerd/config.toml /volume1/rancher/k3s/agent/etc/containerd/config.toml.tmpl 
+```
+
+Now edit config.toml.tmpl and add the following section to it:
+
+```
+[plugins.cri.containerd]
+ snapshotter = "native"
+```
+Now you can start k3s again:
+
+```
+root@synology:~# systemctl start k3s
+```
+And you're done!
 
 
 # kudos / thanks
